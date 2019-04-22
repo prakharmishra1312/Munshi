@@ -1,0 +1,9 @@
+**/.mvn
+**/.project
+**/.settings
+**/.class
+**/.mvnw
+**/target
+**/.metadata
+**/mvnw
+**/mvnw.cmd
