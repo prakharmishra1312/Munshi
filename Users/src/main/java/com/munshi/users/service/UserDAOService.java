@@ -1,4 +1,4 @@
-package com.munshi.users.controller;
+package com.munshi.users.service;
 
 import com.munshi.users.bean.User;
 
