@@ -6,6 +6,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,13 +39,16 @@ public class UsersController {
 	}
 	
 	@PostMapping("/users")
-	public Resource<User> createUser(@RequestBody User user){
+	@CrossOrigin(origins = "http://localhost:3000")
+	public ResponseEntity<Object> createUser(@RequestBody User user){
+		System.out.println("User: "+user.getId()+" ");
 		User createdUser=userService.createUser(user);
-		ControllerLinkBuilder linkTo= linkTo(methodOn(this.getClass()).getUserById(user.getId()));
-		Resource<User> resource = new Resource<User>(createdUser);
-		resource.add(linkTo.withRel("self"));
 		
-		return resource;
+		ControllerLinkBuilder linkTo= linkTo(methodOn(this.getClass()).getUserById(user.getId()));
+		
+		
+		
+		return ResponseEntity.created(linkTo.toUri()).build();
 	}
 	
 	@PutMapping("/users/{id}")
