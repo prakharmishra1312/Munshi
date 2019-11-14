@@ -12,7 +12,7 @@ import com.mebank.accountoperation.AccountBalanceCalculator;
 /**
  * Unit test for simple App.
  */
-public class AppTest2 
+public class AppTest3 
     extends TestCase
 {
 	String transactionsCSV = "";
@@ -22,7 +22,7 @@ public class AppTest2
      *
      * @param testName name of the test case
      */
-    public AppTest2( String testName )
+    public AppTest3( String testName )
     {
         super( testName );
     }
@@ -32,19 +32,19 @@ public class AppTest2
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest2.class );
+        return new TestSuite( AppTest3.class );
     }
 
     /**
      * Rigourous Test :-)
-     * REVERSAL Ref transaction not in Included Time frame
+     * No transactions in timeframe
      */
     public void testApp()
     {
-    	String testString="Relative balance for the period is: -$7.25\nNumber of transactions included is: 1";
+    	String testString="Relative balance for the period is: $0.00\nNumber of transactions included is: 0";
     	String accountId= "ACC334455";
-    	String fromTime="20/10/2018 19:40:00";
-    	String toTime="21/10/2018 09:31:00";
+    	String fromTime="20/10/2015 12:00:00";
+    	String toTime="20/10/2016 19:00:00";
     	String csvFile="./transactions.csv";
     	accountBalanceCalculator.setCSV(csvFile);
     	String result;
