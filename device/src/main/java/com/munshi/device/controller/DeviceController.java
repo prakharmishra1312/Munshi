@@ -3,6 +3,7 @@ package com.munshi.device.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,14 +66,12 @@ public class DeviceController {
 	}
 	
 	@PostMapping("/devices")
-	public Resource<Device> addDevice(@RequestBody Device device){
+	public ResponseEntity<Object> addDevice(@RequestBody Device device){
 		
 		Device newDevice=deviceDAOService.addDevice(device);
-		Resource<Device> resource= new Resource<Device>(newDevice);
 		ControllerLinkBuilder linkTo= linkTo(methodOn(this.getClass()).getDevicebyId(device.getId()));
-		resource.add(linkTo.withRel("self"));
 		
-		return resource;
+		 return ResponseEntity.created(linkTo.toUri()).build();
 		
 	}
 	
